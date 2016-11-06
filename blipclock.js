@@ -1,7 +1,31 @@
+(function() {
+  exports.blip = function(canvas) {
+    if (!canvas.getAttribute('width')) {
+      canvas.setAttribute('width', 400);
+    }
+
+    if (!canvas.getAttribute('height')) {
+      canvas.setAttribute('height', 400);
+    }
+
+    if (!canvas.width) {
+      canvas.width = 400;
+    }
+
+    document.body.innerHTML = 'hello';
+
+    if (!canvas.height) {
+      canvas.height = 400;
+    }
+
+    return canvas;
+  };
+})();
+
 var blipclock = function() {
-  var canvas = document.getElementById("myCanvas");
+  /*var canvas = document.getElementById("myCanvas");
   canvas.width=400;
-  canvas.height=400;
+  canvas.height=400;*/
 
   var ctx = canvas.getContext("2d");
   var originX = canvas.width/2;

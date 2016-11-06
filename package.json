@@ -1,0 +1,30 @@
+{
+  "name": "blip-clock",
+  "version": "0.1.0",
+  "description": "A blipety clock",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GitHug/blip-clock.git"
+  },
+  "keywords": [
+    "blip",
+    "clock",
+    "javascript"
+  ],
+  "author": "Fredrik Mäkilä <fredrik.makila@gmail.com> (https://github.com/githug)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GitHug/blip-clock/issues"
+  },
+  "homepage": "https://github.com/GitHug/blip-clock#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "jsdom": "9.8.3",
+    "jsdom-global": "2.1.0",
+    "mocha": "^3.1.2"
+  }
+}
