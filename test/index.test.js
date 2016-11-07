@@ -1,7 +1,7 @@
 var chai = require('chai'),
   expect = chai.expect,
   should = chai.should(),
-  blipclock = require('../index'),
+  blipclock = require('../app'),
   blip = blipclock.blip;
 
 before(function () {

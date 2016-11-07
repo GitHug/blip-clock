@@ -6,6 +6,6 @@
  */
 module.exports = {
   blip: function(canvas) {
-    return require('./blipclock').blip(canvas);
+    return require('./js/blipclock').blip(canvas);
   }
 };

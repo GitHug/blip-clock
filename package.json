@@ -2,7 +2,7 @@
   "name": "blip-clock",
   "version": "0.1.2",
   "description": "A blipety clock",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "make test"
   },
