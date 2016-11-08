@@ -1,6 +1,6 @@
 ## blip-clock
 
-A node module that draws a blipety clock on the screen. Here is a [live demo](http://githug.github.io/blip-cloc).
+A node module that draws a blipety clock on the screen. Here is a [live demo](http://githug.github.io/blip-clock).
 
 ### Installation
 `npm install blip-clock --save`
