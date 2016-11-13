@@ -1,6 +1,6 @@
 {
   "name": "blip-clock",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A blipety clock",
   "main": "app.js",
   "scripts": {
@@ -26,8 +26,5 @@
     "jsdom": "9.8.3",
     "jsdom-global": "2.1.0",
     "mocha": "^3.1.2"
-  },
-  "dependencies": {
-    "mixin-deep": "^1.1.3"
   }
 }
