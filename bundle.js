@@ -6,28 +6,42 @@ $(function() {
 
   var canvas = $('#blipCanvas').get(0);
 
-  blipClock.blip(canvas);
+  blipClock(canvas);
 });
 
-},{"blip-clock":2,"jquery":4}],2:[function(require,module,exports){
+},{"blip-clock":2,"jquery":5}],2:[function(require,module,exports){
 /**
- * Escape special characters in the given string of html.
+ * Creates a blip-clock and starts the clock
  *
- * @param  {String} html
- * @return {String}
+ * @param  {HTMLElement} canvas - The canvas to render in
+ * @return {HTMLElement} - The canvas
  */
-module.exports = {
-  blip: function(canvas) {
-    return require('./js/blipclock').blip(canvas);
-  }
-};
+module.exports = function(canvas) {
+  require('./js/blipclock').blip(canvas);
+}
 
-},{"./js/blipclock":3}],3:[function(require,module,exports){
+module.exports.config = function(newConfig) {
+  return require('./js/blipconfig').config(newConfig);
+}
+
+  /*blip: function(canvas) {
+    return require('./js/blipclock').blip(canvas);
+  },
+
+  config: function(newConfig) {
+    return require('./js/blipconfig').config(newConfig);
+  }
+};*/
+
+},{"./js/blipclock":3,"./js/blipconfig":4}],3:[function(require,module,exports){
 (function() {
+  "use strict";
 
   var ctx;
   var originX;
   var originY;
+
+  var blipConfig = require('./blipconfig').config();
 
   exports.blip = function(canvas) {
     if(!('getContext' in canvas)){
@@ -85,7 +99,7 @@ module.exports = {
     var outerRadius = radius - outerMargin;
     var innerRadius = radius - innerMargin;
 
-    for(i = 1; i <= 12; i++) {
+    for(var i = 1; i <= 12; i++) {
       var active = i <= hours + 1
       drawPath(outerRadius, innerRadius, arcDegree, active, i);
     }
@@ -101,7 +115,7 @@ module.exports = {
     var outerRadius = radius - outerMargin;
     var innerRadius = radius - innerMargin;
 
-    for(i = 1; i <= 60; i++) {
+    for(var i = 1; i <= 60; i++) {
       var active = i <= minutes + 1;
       drawPath(outerRadius, innerRadius, arcDegree, active, i);
     }
@@ -117,7 +131,7 @@ module.exports = {
     var outerRadius = radius - outerMargin;
     var innerRadius = radius - innerMargin;
 
-    for(i = 1; i <= 60; i++) {
+    for(var i = 1; i <= 60; i++) {
       var active = i <= seconds + 1;
       drawPath(outerRadius, innerRadius, arcDegree, active, i);
     }
@@ -134,13 +148,65 @@ module.exports = {
     ctx.arc(originX, originY, outerRadius, startAngle, endAngle);
     ctx.arc(originX, originY, innerRadius, endAngle, startAngle, true);
     ctx.closePath();
-    ctx.fillStyle = active ? '#C63D0F' : '#FDF3E7';
+    ctx.fillStyle = active ? blipConfig.colorOn : blipConfig.colorOff;
     ctx.fill();
   };
 
 })();
 
-},{}],4:[function(require,module,exports){
+},{"./blipconfig":4}],4:[function(require,module,exports){
+(function() {
+  "use strict";
+
+  exports.config = function(newConfig) {
+    if (newConfig && isValid(newConfig)) {
+      apply(newConfig);
+    }
+
+    return config;
+  }
+
+  function isValid(newConfig) {
+    var incorrectProps = [];
+
+    for (var prop in newConfig) {
+      // skip loop if the property is from prototype
+      if (!newConfig.hasOwnProperty(prop)) continue;
+
+      // If an unknown property has been supplied then it is not validated
+      if (!config.hasOwnProperty(prop)) incorrectProps.push(prop);
+    }
+
+    if (incorrectProps.length > 0) {
+      console.warn('Unknown property ['
+        + incorrectProps.toString()
+        + ']. No config applied');
+
+        return false;
+    }
+    return true;
+  }
+
+  function apply(newConfig) {
+    var incorrectProps = [];
+
+    for (var prop in newConfig) {
+      // skip loop if the property is from prototype
+      if (!newConfig.hasOwnProperty(prop)) continue;
+      if (!config.hasOwnProperty(prop)) continue;
+
+      config[prop] = newConfig[prop];
+    }
+  }
+
+
+  var config = {
+    colorOn: '#C63D0F',
+    colorOff: '#FDF3E7'
+  };
+})();
+
+},{}],5:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.1.1
  * https://jquery.com/

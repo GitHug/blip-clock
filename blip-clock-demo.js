@@ -5,5 +5,5 @@ $(function() {
 
   var canvas = $('#blipCanvas').get(0);
 
-  blipClock.blip(canvas);
+  blipClock(canvas);
 });
