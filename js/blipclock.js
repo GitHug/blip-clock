@@ -5,7 +5,7 @@
   var originX;
   var originY;
 
-  var blipConfig = require('./blipconfig');
+  var blipConfig = require('./blipconfig').config();
 
   exports.blip = function(canvas) {
     if(!('getContext' in canvas)){
