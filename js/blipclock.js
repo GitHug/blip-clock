@@ -1,8 +1,11 @@
 (function() {
+  "use strict";
 
   var ctx;
   var originX;
   var originY;
+
+  var blipConfig = require('./blipconfig');
 
   exports.blip = function(canvas) {
     if(!('getContext' in canvas)){
@@ -60,7 +63,7 @@
     var outerRadius = radius - outerMargin;
     var innerRadius = radius - innerMargin;
 
-    for(i = 1; i <= 12; i++) {
+    for(var i = 1; i <= 12; i++) {
       var active = i <= hours + 1
       drawPath(outerRadius, innerRadius, arcDegree, active, i);
     }
@@ -76,7 +79,7 @@
     var outerRadius = radius - outerMargin;
     var innerRadius = radius - innerMargin;
 
-    for(i = 1; i <= 60; i++) {
+    for(var i = 1; i <= 60; i++) {
       var active = i <= minutes + 1;
       drawPath(outerRadius, innerRadius, arcDegree, active, i);
     }
@@ -92,7 +95,7 @@
     var outerRadius = radius - outerMargin;
     var innerRadius = radius - innerMargin;
 
-    for(i = 1; i <= 60; i++) {
+    for(var i = 1; i <= 60; i++) {
       var active = i <= seconds + 1;
       drawPath(outerRadius, innerRadius, arcDegree, active, i);
     }
@@ -109,7 +112,7 @@
     ctx.arc(originX, originY, outerRadius, startAngle, endAngle);
     ctx.arc(originX, originY, innerRadius, endAngle, startAngle, true);
     ctx.closePath();
-    ctx.fillStyle = active ? '#C63D0F' : '#FDF3E7';
+    ctx.fillStyle = active ? blipConfig.colorOn : blipConfig.colorOff;
     ctx.fill();
   };
 

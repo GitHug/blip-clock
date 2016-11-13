@@ -26,5 +26,8 @@
     "jsdom": "9.8.3",
     "jsdom-global": "2.1.0",
     "mocha": "^3.1.2"
+  },
+  "dependencies": {
+    "mixin-deep": "^1.1.3"
   }
 }
