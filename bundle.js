@@ -6,32 +6,42 @@ $(function() {
 
   var canvas = $('#blipCanvas').get(0);
 
-  blipClock(canvas);
+  blipClock(canvas, {
+    colorOn: '#CCFF99',
+    colorOff: '#000'
+  });
 });
 
 },{"blip-clock":2,"jquery":5}],2:[function(require,module,exports){
+"use strict";
+
+var blipClock = require('./js/blipclock'),
+    blipConfig = require('./js/blipconfig');
+
 /**
  * Creates a blip-clock and starts the clock
  *
- * @param  {HTMLElement} canvas - The canvas to render in
- * @return {HTMLElement} - The canvas
+ * @param {HTMLElement} canvas - The canvas to render in
+ * @param {BlipConfig} [newConfig] - Optional {@link BlipConfig} that can modify
+ * the default configuration. It does not have to include all properties.
+ * @return {HTMLElement} - The canvas that has been rendered in
  */
-module.exports = function(canvas) {
-  require('./js/blipclock').blip(canvas);
+module.exports = function(canvas, newConfig) {
+  blipConfig.config(newConfig);
+  return blipClock.blip(canvas);
 }
 
+/**
+ * Changes the default configuration for blip-clock
+ *
+ * @param {BlipConfig} [newConfig] - Optional {@link BlipConfig} that can modify
+ * the default configuration. It does not have to include all properties.
+ * @return {BlipConfig} - The currently active configuration for blip-clock.
+ * If no newConfig has been supplied then it returns the default configuration.
+ */
 module.exports.config = function(newConfig) {
-  return require('./js/blipconfig').config(newConfig);
+  return blipConfig.config(newConfig);
 }
-
-  /*blip: function(canvas) {
-    return require('./js/blipclock').blip(canvas);
-  },
-
-  config: function(newConfig) {
-    return require('./js/blipconfig').config(newConfig);
-  }
-};*/
 
 },{"./js/blipclock":3,"./js/blipconfig":4}],3:[function(require,module,exports){
 (function() {
@@ -155,9 +165,16 @@ module.exports.config = function(newConfig) {
 })();
 
 },{"./blipconfig":4}],4:[function(require,module,exports){
+
 (function() {
   "use strict";
 
+  /**
+   * Configuration for a BlipConfig.
+   * @typedef {Object} BlipConfig
+   * @property {string} colorOn - A hexadecimal color code that is used when a blip is active.
+   * @property {string} colorOff - A hexadecimal color code that is used when a blip is inactive.
+   */
   exports.config = function(newConfig) {
     if (newConfig && isValid(newConfig)) {
       apply(newConfig);
@@ -166,6 +183,12 @@ module.exports.config = function(newConfig) {
     return config;
   }
 
+  /**
+   * Checks if the
+   *
+   * @property {BlipConfig} newConfig - heej
+   *
+   */
   function isValid(newConfig) {
     var incorrectProps = [];
 
@@ -188,8 +211,6 @@ module.exports.config = function(newConfig) {
   }
 
   function apply(newConfig) {
-    var incorrectProps = [];
-
     for (var prop in newConfig) {
       // skip loop if the property is from prototype
       if (!newConfig.hasOwnProperty(prop)) continue;
@@ -199,7 +220,9 @@ module.exports.config = function(newConfig) {
     }
   }
 
-
+  /**
+   * Default configuration
+   */
   var config = {
     colorOn: '#C63D0F',
     colorOff: '#FDF3E7'

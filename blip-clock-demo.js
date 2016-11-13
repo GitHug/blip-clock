@@ -5,5 +5,8 @@ $(function() {
 
   var canvas = $('#blipCanvas').get(0);
 
-  blipClock(canvas);
+  blipClock(canvas, {
+    colorOn: '#CCFF99',
+    colorOff: '#000'
+  });
 });
