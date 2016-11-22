@@ -2,6 +2,8 @@
 
 A node module that draws a blipety clock on the screen. Here is a [live demo](http://githug.github.io/blip-clock).
 
+[![NPM](https://nodei.co/npm/blip-clock.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/blip-clock/)
+
 ### Installation
 `npm install blip-clock --save`
 
